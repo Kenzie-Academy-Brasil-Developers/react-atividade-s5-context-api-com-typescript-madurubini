@@ -15,22 +15,22 @@ interface CartProps {
 interface CartProviderData {
   cart: Product[];
   addProduct: (product: Product) => void;
-  deleteProduct: (product: Product) => void;
+  deleteProduct: (pos: number) => void;
 }
-const CartContext = createContext<CartProviderData>({} as CartProviderData);
+export const CartContext = createContext<CartProviderData>(
+  {} as CartProviderData
+);
 
 export const CartProvider = ({ children }: CartProps) => {
   const [cart, setCart] = useState<Product[]>([]);
 
   const addProduct = (product: Product) => {
     console.log(product);
-    // setCart([...cart, product]);
+    setCart([...cart, product]);
   };
 
-  const deleteProduct = (productToBeDeleted: Product) => {
-    const newCart = cart.filter(
-      (product) => product.title !== productToBeDeleted.title
-    );
+  const deleteProduct = (pos: number) => {
+    const newCart = cart.filter((_, index) => index !== pos);
     setCart(newCart);
   };
 

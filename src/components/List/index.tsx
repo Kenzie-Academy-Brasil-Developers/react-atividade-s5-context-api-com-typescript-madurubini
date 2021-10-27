@@ -1,7 +1,7 @@
 import products from "../../products";
 import Card from "../Card";
 import { useState } from "react";
-import { useCart } from "../../providers/Cart";
+import { useCart } from "../../Providers/Cart";
 const List = () => {
   const { addProduct, deleteProduct, cart } = useCart();
   const [isRemovable, setIsRemovable] = useState(false);
@@ -26,7 +26,7 @@ const List = () => {
           </button>
         </>
       ))}
-      {/* {cart.map((item) => (
+      {cart.map((item, index) => (
         <>
           <Card
             title={item.title}
@@ -35,8 +35,15 @@ const List = () => {
             price={item.price}
             image={item.image}
           />
+          <button
+            onClick={() => {
+              deleteProduct(index);
+            }}
+          >
+            remove from cart
+          </button>
         </>
-      ))} */}
+      ))}
     </>
   );
 };
