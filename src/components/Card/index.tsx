@@ -1,18 +1,52 @@
+import { useCart } from "../../Providers/Cart";
+import { BoxImg, StyledCard } from "./styles";
+
 interface CardProps {
   title: string;
   id: number;
-  description: string;
   price: number;
   image: string;
+  index?: any;
+  product?: any;
+  isRemovable: boolean;
 }
 
-const Card = ({ title, id, description, price, image }: CardProps) => {
+const Card = ({
+  title,
+  id,
+  price,
+  image,
+  index,
+  product,
+  isRemovable,
+}: CardProps) => {
+  const { addProduct, deleteProduct } = useCart();
+
   return (
-    <li key={id}>
-      <img src={image} alt={title} />
+    <StyledCard key={id}>
+      <BoxImg>
+        <img src={image} alt={title} />
+      </BoxImg>
       <h3>{title}</h3>
-      <span>{price}</span>
-    </li>
+      <span>R$ {price}</span>
+      {isRemovable ? (
+        <button
+          onClick={() => {
+            deleteProduct(index);
+          }}
+        >
+          remove from cart
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            addProduct(product);
+          }}
+        >
+          add to cart
+        </button>
+      )}
+    </StyledCard>
   );
 };
 

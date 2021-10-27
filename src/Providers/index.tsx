@@ -5,8 +5,7 @@ interface ProvidersProps {
   children: ReactNode;
 }
 
-const Providers = ({ children }: ProvidersProps) => {
-  return <CartProvider>{children}</CartProvider>;
-};
-
+const Providers = ({ children }: ProvidersProps) => (
+  <CartProvider>{children}</CartProvider>
+);
 export default Providers;
